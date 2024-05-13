@@ -1,2 +1,23 @@
-<p>create-exercise works!</p>
-<button type="button" (click)="addTestExercise()">Add test exercise</button>
+<div class="container-fluid">
+    <h2>Create new exercise</h2>
+    <form [formGroup]="exerciseForm">
+        <div class="form-control">
+            <label >Name</label>
+            <input formControlName="name" type="text" class="form-control">
+        </div>
+        
+        <div class="form-control">
+            <label >Muscle groups</label>
+            <label *ngFor="let option of Object.values(myEnum)">
+              <input type="radio" [value]="option" formControlName="option"> {{ option }}
+            </label>
+        </div>
+
+        <div class="form-control">
+            <label >Description</label>
+            <input formControlName="description" type="text" class="form-control">
+        </div>
+        
+        <button type="btn btn-primary" type="submit" (click)="createExercise()">Add exercise</button>
+    </form>
+</div>

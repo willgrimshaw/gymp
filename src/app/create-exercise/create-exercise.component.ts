@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ExerciseService, Exercise, muscleGroup } from '../exercise.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-exercise',
@@ -9,17 +10,22 @@ import { ExerciseService, Exercise, muscleGroup } from '../exercise.service';
 export class CreateExerciseComponent {
   constructor(private exerciseService: ExerciseService) {}
 
+  exerciseForm = new FormGroup({
+    name: new FormControl(''),
+    muscleGroup: new FormControl(''),
+    description: new FormControl('')
+  });
 
-
-  addTestExercise()
+  addExercise()
   {
+    // unused
     var testExercise: Exercise = { 
-      id:-1,
-      name:"",
+      name:"test",
       muscleGroups:[],
-      description:""
+      description:"test"
     };
 
+    var exercise = this.exerciseForm.value;
     this.exerciseService.postExercise(testExercise);
   }
 }

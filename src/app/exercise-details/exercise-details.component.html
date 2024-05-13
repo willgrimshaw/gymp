@@ -1,14 +1,14 @@
 <div *ngIf="(exercise$ | async) as exercise">
     <!-- Display data here -->
       
-    <div *ngIf="exercise.id != -1">
+    <div *ngIf="exercise.id != '-1'">
         <p>{{ exercise.name }}</p>
         <p>Muscle groups: {{ this.getMuscleGroupList(exercise.muscleGroups) }}</p>
         <p>Description: {{ exercise.description }}</p>
     </div>
     
       
-    <div *ngIf="exercise.id == -1">
+    <div *ngIf="exercise.id == '-1'">
         <p>Error, exercise no longer exists.</p>
     </div>
 

@@ -10,6 +10,7 @@ import { ExerciseDetailsComponent } from './exercise-details/exercise-details.co
 
 import { HttpClientModule } from '@angular/common/http';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CreateExerciseComponent } from './create-exercise/create-exercise.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

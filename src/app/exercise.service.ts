@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface Exercise {
-  id: number;
+  id?: string;
   name: string;
   muscleGroups: muscleGroup[];
   description: string;
@@ -34,7 +34,7 @@ export class ExerciseService {
   ) {}
 
   nullExercise: Exercise = { 
-    id:-1,
+    id: "-1",
     name:"",
     muscleGroups:[],
     description:""
@@ -47,20 +47,17 @@ export class ExerciseService {
 
   postExercise(exercise: Exercise)
   {
-    this.http.post<Exercise[]>('http://localhost:3000/exercises', exercise);
+    this.http.post('http://localhost:3000/exercises', exercise).subscribe({complete: console.info});
   }
 
-  getExerciseById(id: number)
+  getExerciseById(id: string)
   {
     return this.http.get<Exercise>('http://localhost:3000/exercises/' + id).pipe(
       map(x => x || this.nullExercise)
     );
-    return this.getExerciseList().pipe(
-      map(x => x.find(y => y.id == id) || this.nullExercise)  
-    )
   }
 
-  async getExerciseByIdAsync(id: number) 
+  async getExerciseByIdAsync(id: string) 
   {
     return await firstValueFrom(this.getExerciseById(id));
   }

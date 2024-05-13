@@ -19,7 +19,7 @@ export class ExerciseDetailsComponent implements OnInit {
   ngOnInit() {
     // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const exerciseIdFromRoute = Number(routeParams.get('exerciseId'));
+    const exerciseIdFromRoute = String(routeParams.get('exerciseId'));
     this.exercise$ = this.exerciseService.getExerciseById(exerciseIdFromRoute);
   }
   

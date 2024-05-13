@@ -1,1 +1,43 @@
-{"exercises":[{"id":1,"name":"Dead lift","muscleGroups":[1,7],"description":"Lift big weights."},{"id":2,"name":"Squat","muscleGroups":[6,7],"description":"Leg exercise."},{"id":3,"name":"Bench press","muscleGroups":[2,3],"description":"Dorrito."}]}
+{
+  "exercises": [
+    {
+      "id": "1",
+      "name": "Dead lift",
+      "muscleGroups": [
+        1,
+        7
+      ],
+      "description": "Lift big weights."
+    },
+    {
+      "id": "2",
+      "name": "Squat",
+      "muscleGroups": [
+        6,
+        7
+      ],
+      "description": "Leg exercise."
+    },
+    {
+      "id": "3",
+      "name": "Bench press",
+      "muscleGroups": [
+        2,
+        3
+      ],
+      "description": "Dorrito."
+    },
+    {
+      "id": "c4c3",
+      "name": "test",
+      "muscleGroups": [],
+      "description": "test"
+    },
+    {
+      "id": "7822",
+      "name": "test",
+      "muscleGroups": [],
+      "description": "test"
+    }
+  ]
+}
