@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 export interface Exercise {
   id: number;
@@ -52,7 +52,9 @@ export class ExerciseService {
 
   getExerciseById(id: number)
   {
-    return this.http.get<Exercise>('http://localhost:3000/exercises/' + id) || this.nullExercise;
+    return this.http.get<Exercise>('http://localhost:3000/exercises/' + id).pipe(
+      map(x => x || this.nullExercise)
+    );
     return this.getExerciseList().pipe(
       map(x => x.find(y => y.id == id) || this.nullExercise)  
     )
