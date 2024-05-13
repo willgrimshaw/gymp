@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { exercises } from '../hardCodedExercises';
-
-import { ExerciseService } from '../exercise.service';
+import { Observable } from 'rxjs';
+import { ExerciseService, Exercise } from '../exercise.service';
 
 @Component({
   selector: 'app-exercise-list',
@@ -11,11 +10,9 @@ import { ExerciseService } from '../exercise.service';
 export class ExerciseListComponent implements OnInit {
   constructor(private exerciseService: ExerciseService) {}
 
-  //exercises!: Observable<Exercise[]>;
-
-  exercises = this.exerciseService.getExercises()
+  exercises!: Observable<Exercise[]>;
 
   ngOnInit() {
-    window.alert(JSON.stringify(exercises));
+    this.exercises = this.exerciseService.getExerciseList();
   }
 }

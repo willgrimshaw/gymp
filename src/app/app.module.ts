@@ -9,6 +9,7 @@ import { ExerciseListComponent } from './exercise-list/exercise-list.component';
 import { ExerciseDetailsComponent } from './exercise-details/exercise-details.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     ExercisesComponent,
     TopBarComponent,
     ExerciseListComponent,
-    ExerciseDetailsComponent
+    ExerciseDetailsComponent,
+    CreateExerciseComponent
   ],
   imports: [
     BrowserModule,

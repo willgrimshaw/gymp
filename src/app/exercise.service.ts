@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Exercise {
   id: number;
@@ -30,17 +30,36 @@ export enum muscleGroup
 
 export class ExerciseService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
-    //myObservable = new Observable((observer) => 
-    //  {
-    //    console.log("Observer begin");
-    //  }); 
-  
-    getExercises() 
-    {
-      return this.http.get<Exercise[]>('/assets/exercises.json');
-    }
+  nullExercise: Exercise = { 
+    id:-1,
+    name:"",
+    muscleGroups:[],
+    description:""
+  };
 
+  getExerciseList() 
+  {
+    return this.http.get<Exercise[]>('http://localhost:3000/exercises');
+  }
+
+  postExercise(exercise: Exercise)
+  {
+    this.http.post<Exercise[]>('http://localhost:3000/exercises', exercise);
+  }
+
+  getExerciseById(id: number)
+  {
+    return this.http.get<Exercise>('http://localhost:3000/exercises/' + id) || this.nullExercise;
+    return this.getExerciseList().pipe(
+      map(x => x.find(y => y.id == id) || this.nullExercise)  
+    )
+  }
+
+  async getExerciseByIdAsync(id: number) 
+  {
+    return await firstValueFrom(this.getExerciseById(id));
+  }
 }

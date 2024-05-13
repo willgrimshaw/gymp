@@ -1,1 +1,20 @@
-<p>exercise-details works!</p>
+<div *ngIf="(exercise$ | async) as exercise">
+    <!-- Display data here -->
+      
+    <div *ngIf="exercise.id != -1">
+        <p>{{ exercise.name }}</p>
+        <p>Muscle groups: {{ this.getMuscleGroupList(exercise.muscleGroups) }}</p>
+        <p>Description: {{ exercise.description }}</p>
+    </div>
+    
+      
+    <div *ngIf="exercise.id == -1">
+        <p>Error, exercise no longer exists.</p>
+    </div>
+
+</div>
+  
+<div *ngIf="!(exercise$ | async)">
+    <!-- Show loading or placeholder content -->
+    <p>Loading...</p>
+</div>
