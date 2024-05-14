@@ -12,16 +12,16 @@ export interface Exercise {
 
 export enum muscleGroup
 {
-  UpperBack,
-  LowerBack,
-  Chest,
-  Triceps,
-  Biceps,
-  Shoulders,
-  Quadriceps,
-  Hamstrings,
-  Calves,
-  ForeArms
+  UpperBack = 'UpperBack',
+  LowerBack = 'LowerBack',
+  Chest = 'Chest',
+  Triceps = 'Triceps',
+  Biceps = 'Biceps',
+  Shoulders = 'Shoulders',
+  Quadriceps = 'Quadriceps',
+  Hamstrings = 'Hamstrings',
+  Calves = 'Calves',
+  ForeArms = 'ForeArms'
 }
 
 @Injectable({

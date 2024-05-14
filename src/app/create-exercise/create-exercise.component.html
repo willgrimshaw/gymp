@@ -1,23 +1,29 @@
 <div class="container-fluid">
     <h2>Create new exercise</h2>
-    <form [formGroup]="exerciseForm">
-        <div class="form-control">
-            <label >Name</label>
-            <input formControlName="name" type="text" class="form-control">
-        </div>
-        
-        <div class="form-control">
-            <label >Muscle groups</label>
-            <label *ngFor="let option of Object.values(myEnum)">
-              <input type="radio" [value]="option" formControlName="option"> {{ option }}
-            </label>
+
+      <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" formControlName="name">
         </div>
 
-        <div class="form-control">
-            <label >Description</label>
-            <input formControlName="description" type="text" class="form-control">
+        <div>
+            <label for="muscleGroupsCheckList">Muscle Groups:</label>
+            <ul FormArrayName="muscleGroups" id="muscleGroupsCheckList">
+                <li *ngFor="let muscleGroup of muscleGroups; let i = index">
+                    <label [for]="muscleGroup + 'Checkbox'">{{ muscleGroup }}
+                        <input [formControlName]="i" type="checkbox" [id]="muscleGroup + 'Checkbox'">
+                    </label>
+                </li>
+            </ul>
         </div>
-        
-        <button type="btn btn-primary" type="submit" (click)="createExercise()">Add exercise</button>
-    </form>
+
+        <div>
+          <label for="description">Description:</label>
+          <textarea id="description" formControlName="description"></textarea>
+        </div>
+
+        <button type="submit" [disabled]="exerciseForm.invalid" onclick="onSubmit()">Submit</button>
+      </form>
+
 </div>
