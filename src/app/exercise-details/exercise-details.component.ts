@@ -21,6 +21,7 @@ export class ExerciseDetailsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const exerciseIdFromRoute = String(routeParams.get('exerciseId'));
     this.exercise$ = this.exerciseService.getExerciseById(exerciseIdFromRoute);
+    this.exerciseService.debugExerciseByIdAsync(exerciseIdFromRoute)//REMOVE
   }
   
   getMuscleGroupList(muscleGroups: muscleGroup[])

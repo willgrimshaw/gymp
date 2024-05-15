@@ -12,16 +12,16 @@ export interface Exercise {
 
 export enum muscleGroup
 {
-  UpperBack = 'UpperBack',
-  LowerBack = 'LowerBack',
-  Chest = 'Chest',
-  Triceps = 'Triceps',
-  Biceps = 'Biceps',
-  Shoulders = 'Shoulders',
-  Quadriceps = 'Quadriceps',
-  Hamstrings = 'Hamstrings',
-  Calves = 'Calves',
-  ForeArms = 'ForeArms'
+  UpperBac,
+  LowerBack,
+  Chest,
+  Triceps,
+  Biceps,
+  Shoulders,
+  Quadriceps ,
+  Hamstrings,
+  Calves,
+  ForeArms
 }
 
 @Injectable({
@@ -57,8 +57,9 @@ export class ExerciseService {
     );
   }
 
-  async getExerciseByIdAsync(id: string) 
+  async debugExerciseByIdAsync(id: string) 
   {
-    return await firstValueFrom(this.getExerciseById(id));
+    var rtn = await firstValueFrom(this.getExerciseById(id));
+    alert(JSON.stringify(rtn));
   }
 }

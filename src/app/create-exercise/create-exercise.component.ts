@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ExerciseService, Exercise, muscleGroup } from '../exercise.service';
-import { FormBuilder, FormControl, FormGroup, Validators, FormArray, FormControlName } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { ExerciseService, muscleGroup } from '../exercise.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown'; 
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-exercise',
@@ -10,47 +11,43 @@ import { Subscription } from 'rxjs';
 })
 export class CreateExerciseComponent implements OnInit {
   exerciseForm!: FormGroup;
-  subscription!: Subscription;
-  selectedMuscleGroups: string[] = [];
-  muscleGroups = Object.values(muscleGroup);
+  dropdownList!: string[];
+  selectedItems = [];
+  dropdownSettings!:IDropdownSettings;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private exerciseService: ExerciseService,
+    private _snackBar: MatSnackBar 
+  ) {}
 
   ngOnInit() {
+    this.dropdownList = Object.keys(muscleGroup).filter(x => isNaN(parseInt(x)));
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: false
+    };
+
+    
     this.exerciseForm = this.fb.group({
-      name:'',
-      muscleGroups: this.fb.array([]),
+      name: ['', Validators.required],
+      muscleGroups: [],
       description:''
     })  
-    
-    const control = this.exerciseForm.controls['muscleGroups'];
-    this.subscription = control.valueChanges.subscribe(value => {
-      this.selectedMuscleGroups = this.muscleGroups.map((muscleGroup, index) =>
-        control.value[index] ? value : null
-      )
-      .filter(contactNo => !!contactNo);
-      alert("changed");
-    });
-  }
-  
-  get MuscleGroupsArray()
-  {
-    return this.exerciseForm.controls["muscleGroups"] as FormArray;
-  }
-
-  addMuscleGroup(muscleGroup: muscleGroup)
-  {
-    this.MuscleGroupsArray.push(this.fb.control(muscleGroup));
-  }
-
-  removeMuscleGroup(muscleGroup: muscleGroup)
-  {
-    this.MuscleGroupsArray
   }
 
   onSubmit()
   {
-    alert(this.selectedMuscleGroups);
-    alert(this.exerciseForm.get('muscleGroups')?.value);
+    this.exerciseService.postExercise(this.exerciseForm.value);
+    var message = "Exercise '" + this.exerciseForm.value['name'] + "' successfully created.";
+    this._snackBar.open(message, 'Close', {
+      duration: 2000, // Duration in milliseconds
+    });
+    this.exerciseForm.reset();
   }
 }

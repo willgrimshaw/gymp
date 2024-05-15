@@ -2,7 +2,7 @@
     <!-- Display data here -->
       
     <div *ngIf="exercise.id != '-1'">
-        <p>{{ exercise.name }}</p>
+        <h1>{{ exercise.name }}</h1>
         <p>Muscle groups: {{ this.getMuscleGroupList(exercise.muscleGroups) }}</p>
         <p>Description: {{ exercise.description }}</p>
     </div>

@@ -8,25 +8,24 @@
         </div>
 
         <div>
-          <ng-multiselect-dropdown></ng-multiselect-dropdown>
-
-
-            <label for="muscleGroupsCheckList">Muscle Groups:</label>
-            <ul FormArrayName="muscleGroups" id="muscleGroupsCheckList">
-                <li *ngFor="let muscleGroup of muscleGroups; let i = index">
-                    <label [for]="muscleGroup + 'Checkbox'">{{ muscleGroup }}
-                        <input [formControlName]="i" type="checkbox" [id]="muscleGroup + 'Checkbox'">
-                    </label>
-                </li>
-            </ul>
+          <ng-multiselect-dropdown formControlName="muscleGroups"
+            [placeholder]="'Muscle Groups'"
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+            [(ngModel)]="selectedItems"
+          >
+          </ng-multiselect-dropdown>
         </div>
-
+        
         <div>
           <label for="description">Description:</label>
           <textarea id="description" formControlName="description"></textarea>
         </div>
 
-        <button type="submit" [disabled]="exerciseForm.invalid">Submit</button>
+        <button id="submitForm" type="submit" [disabled]="exerciseForm.invalid">Submit</button>
+        <ng-container *ngIf="this.exerciseForm.get('name')?.invalid">
+          <p>Please enter a name.</p>
+        </ng-container>
       </form>
 
 </div>
