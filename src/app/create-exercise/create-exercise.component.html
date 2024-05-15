@@ -8,6 +8,9 @@
         </div>
 
         <div>
+          <ng-multiselect-dropdown></ng-multiselect-dropdown>
+
+
             <label for="muscleGroupsCheckList">Muscle Groups:</label>
             <ul FormArrayName="muscleGroups" id="muscleGroupsCheckList">
                 <li *ngFor="let muscleGroup of muscleGroups; let i = index">
@@ -23,7 +26,7 @@
           <textarea id="description" formControlName="description"></textarea>
         </div>
 
-        <button type="submit" [disabled]="exerciseForm.invalid" onclick="onSubmit()">Submit</button>
+        <button type="submit" [disabled]="exerciseForm.invalid">Submit</button>
       </form>
 
 </div>

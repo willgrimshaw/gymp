@@ -19,7 +19,7 @@ export class CreateExerciseComponent implements OnInit {
   ngOnInit() {
     this.exerciseForm = this.fb.group({
       name:'',
-      muscleGroups: this.fb.array(this.muscleGroups.map(x => false)),
+      muscleGroups: this.fb.array([]),
       description:''
     })  
     
@@ -29,10 +29,24 @@ export class CreateExerciseComponent implements OnInit {
         control.value[index] ? value : null
       )
       .filter(contactNo => !!contactNo);
+      alert("changed");
     });
   }
   
+  get MuscleGroupsArray()
+  {
+    return this.exerciseForm.controls["muscleGroups"] as FormArray;
+  }
 
+  addMuscleGroup(muscleGroup: muscleGroup)
+  {
+    this.MuscleGroupsArray.push(this.fb.control(muscleGroup));
+  }
+
+  removeMuscleGroup(muscleGroup: muscleGroup)
+  {
+    this.MuscleGroupsArray
+  }
 
   onSubmit()
   {
