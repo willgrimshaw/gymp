@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { firstValueFrom, throwError, of } from 'rxjs';
+import { map, catchError, timeout } from 'rxjs/operators';
 
 export interface Exercise {
   id?: string;
@@ -53,13 +53,19 @@ export class ExerciseService {
   getExerciseById(id: string)
   {
     return this.http.get<Exercise>('http://localhost:3000/exercises/' + id).pipe(
-      map(x => x || this.nullExercise)
-    );
+      catchError(error => {
+        if (error.status === 404) {
+          // Handle 404 error (Not Found)
+          return of(this.nullExercise);
+        }
+        // Handle other errors
+        return throwError(error);
+      }));
   }
 
-  async debugExerciseByIdAsync(id: string) 
+  deleteExerciseById(id: string)
   {
-    var rtn = await firstValueFrom(this.getExerciseById(id));
-    alert(JSON.stringify(rtn));
+    console.log("Deleting exercise " + id);
+    this.http.delete<Exercise>('http://localhost:3000/exercises/' + id)
   }
 }

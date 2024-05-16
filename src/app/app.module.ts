@@ -13,6 +13,8 @@ import { CreateExerciseComponent } from './create-exercise/create-exercise.compo
 import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-popup.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     TopBarComponent,
     ExerciseListComponent,
     ExerciseDetailsComponent,
-    CreateExerciseComponent
+    CreateExerciseComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     HttpClientModule,
     ReactiveFormsModule,
     NgMultiSelectDropDownModule.forRoot(),
+    MatDialogModule
   ],
   providers: [
     provideAnimationsAsync()

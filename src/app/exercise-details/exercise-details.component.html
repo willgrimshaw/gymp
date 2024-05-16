@@ -5,11 +5,15 @@
         <h1>{{ exercise.name }}</h1>
         <p>Muscle groups: {{ this.getMuscleGroupList(exercise.muscleGroups) }}</p>
         <p>Description: {{ exercise.description }}</p>
+
+
+        <button mat-raised-button (click)="delete()">Delete</button>
+
     </div>
     
       
     <div *ngIf="exercise.id == '-1'">
-        <p>Error, exercise no longer exists.</p>
+        <p>Error, exercise was not found and may have been deleted.</p>
     </div>
 
 </div>
